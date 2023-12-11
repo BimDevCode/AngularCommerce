@@ -1,0 +1,2 @@
+dotnet ef migrations add IdentityInitial -p Infrastructure -s API -c AppIdentityDbContext -o Identity/Migrations
+dotnet ef migrations remove -p Infrastructure -s API -c AppIdentityDbContext
