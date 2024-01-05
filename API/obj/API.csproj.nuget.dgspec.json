@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ABC\\GitSkinet\\api\\API.csproj": {}
+    "C:\\ABC\\GitSkinet\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\ABC\\GitSkinet\\api\\API.csproj": {
+    "C:\\ABC\\GitSkinet\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ABC\\GitSkinet\\api\\API.csproj",
+        "projectUniqueName": "C:\\ABC\\GitSkinet\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\ABC\\GitSkinet\\api\\API.csproj",
+        "projectPath": "C:\\ABC\\GitSkinet\\API\\API.csproj",
         "packagesPath": "C:\\Users\\nikol\\.nuget\\packages\\",
-        "outputPath": "C:\\ABC\\GitSkinet\\api\\obj\\",
+        "outputPath": "C:\\ABC\\GitSkinet\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

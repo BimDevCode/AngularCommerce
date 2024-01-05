@@ -1,0 +1,14 @@
+<div class="form-label-group">
+    <input 
+        [ngClass]="(controlDir.touched) ? controlDir.invalid ? 'is-invalid' : 'is-valid' : null"
+        type={{type}}
+        [formControl]="getControl()"
+        id="{{label}}" 
+        class="form-control" 
+        placeholder="{{label}}">
+    <div *ngIf="controlDir && controlDir.control && controlDir.control.status === 'PENDING'" class="fa fa-spinner fa-spin loader"></div>
+    <label for="floatingInput">{{label}}</label>
+    <div *ngIf="controlDir.errors?.['required']" class="invalid-feedback">{{label}} is required</div>
+    <div *ngIf="controlDir.errors?.['email']" class="invalid-feedback">Email address</div>
+    <div *ngIf="controlDir.errors?.['pattern']" class="invalid-feedback">Incorrect format</div>
+  </div>
