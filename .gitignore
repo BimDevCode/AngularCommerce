@@ -113,7 +113,7 @@ $RECYCLE.BIN/
 # Angular
 Client/node_modules/
 Client/dist/
-
+Client/.angular/
 # .NET
 bin/
 obj/
