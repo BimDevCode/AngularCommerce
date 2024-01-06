@@ -10,8 +10,8 @@ export class TextInputComponent implements ControlValueAccessor{
   @Input() type = 'text';
   @Input() label = '';
 
-  constructor(@Self() public controlDir: NgControl) {
-    this.controlDir.valueAccessor = this;
+  constructor(@Self() public control: NgControl) {
+    this.control.valueAccessor = this;
   }
   writeValue(obj: any): void {
   }
@@ -22,6 +22,6 @@ export class TextInputComponent implements ControlValueAccessor{
   setDisabledState?(isDisabled: boolean): void {
   }
   getControl(): FormControl {
-    return this.controlDir.control as FormControl;
+    return this.control.control as FormControl;
   }
 }
