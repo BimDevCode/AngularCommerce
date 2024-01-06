@@ -3,8 +3,8 @@
 
 # Visual Studio
 .vs/
-.bin/
-.obj/
+**/bin/
+**/obj/
 .Debug/
 *.suo
 *.user
