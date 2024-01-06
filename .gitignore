@@ -3,6 +3,9 @@
 
 # Visual Studio
 .vs/
+.bin/
+.obj/
+.Debug/
 *.suo
 *.user
 *.sln.docstates
