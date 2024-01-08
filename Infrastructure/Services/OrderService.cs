@@ -22,7 +22,7 @@ namespace Infrastructure.Services
 
             // get items from the product repo
             var items = new List<OrderItem>();
-            foreach (var item in basket.BasketItems)
+            foreach (var item in basket.Items)
             {
                 var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
                 var itemOrdered = new ProductItemOrdered(productItem.Id, productItem.Name, productItem.PictureUrl);
