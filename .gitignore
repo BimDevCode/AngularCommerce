@@ -5,6 +5,8 @@
 .vs/
 **/bin/
 **/obj/
+**/Migrations/
+**/ssl/
 .Debug/
 *.suo
 *.user
