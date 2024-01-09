@@ -1,6 +1,10 @@
 # Visual Studio Code
 .vscode/
 
+#SQL lite
+*.db-shm
+*.db-wal
+
 # Visual Studio
 .vs/
 **/bin/
