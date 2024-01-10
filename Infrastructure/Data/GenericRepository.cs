@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -29,14 +30,16 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     }
 
     public async Task<T> GetByIdAsync(int id){
-        return await _context.Set<T>().FindAsync(id) 
-            ?? throw new Exception("ERR001: Can't get products from db");
+#pragma warning disable CS8603 // Possible null reference return.
+        return await _context.Set<T>().FindAsync(id); ///if bot found - better for performance return null then throw an exception
+#pragma warning restore CS8603 // Possible null reference return.
     }
-
+   
     public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
     {
-        return await ApplySpecification(spec).FirstOrDefaultAsync() 
-            ?? throw new Exception("ERR001: Can't get products from db");
+#pragma warning disable CS8603 // Possible null reference return.
+        return await ApplySpecification(spec).FirstOrDefaultAsync(); //if bot found - better for performance return null then throw an exception
+#pragma warning restore CS8603 // Possible null reference return.
     }
 
     public async Task<IReadOnlyList<T>> ListAllAsync(){
