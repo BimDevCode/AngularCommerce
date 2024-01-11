@@ -1,9 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Basket, BasketItem, BasketTotals } from '../shared/models/basket';
-import { HttpClient } from '@angular/common/http';
+import { DeliveryMethod } from '../shared/models/deliveryMethod';
 import { Product } from '../shared/models/product';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +14,27 @@ export class BasketService {
   baseUrl = environment.apiUrl;
   private basketSource = new BehaviorSubject<Basket | null>(null);
   basketSource$ = this.basketSource.asObservable();
-  basket$ = this.basketSource.asObservable();
   private basketTotalsSource = new BehaviorSubject<BasketTotals | null>(null);
   basketTotalsSource$ = this.basketTotalsSource.asObservable();
 
   constructor(private httpClient : HttpClient ) { }
+  
+  createPaymentIntent() {
+    return this.httpClient.post<Basket>(this.baseUrl + 'payments/' + this.getBasketValue()?.id, {})
+      .pipe(
+        map(basket => {
+          this.basketSource.next(basket);
+        })
+      )
+  }
+  setShippingPrice(deliveryMethod: DeliveryMethod) {
+    const basket = this.getBasketValue();
+    if (basket) {
+      basket.shippingPrice = deliveryMethod.price;
+      basket.deliveryMethodId = deliveryMethod.id;
+      this.setBasket(basket);
+    }
+  }
 
   getBasket(id: string) {
     return this.httpClient.get<Basket>(this.baseUrl + 'basket?id=' + id).subscribe({
@@ -62,6 +80,7 @@ export class BasketService {
       else this.deleteBasket(basket);
     }
   }
+  
   deleteBasket(basket: Basket) {
     return this.httpClient.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe({
       next: () => {
@@ -72,6 +91,7 @@ export class BasketService {
       error: error => console.log(error)
     })
   }
+
   addOrUpdateItem(items: BasketItem[], itemToAdd: BasketItem, quantity: number): BasketItem[] {
     const item = items.find(x => x.id === itemToAdd.id);
     if(item) item.quantity += quantity;
@@ -81,6 +101,7 @@ export class BasketService {
     }
     return items;
   }
+
   createBasket(): Basket{
     const basket = new Basket();
     localStorage.setItem('basket_id', basket.id);
