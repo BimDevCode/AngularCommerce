@@ -11,10 +11,12 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { OrderDetailedComponent } from './order-detailed/order-detailed.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OrderDetailedComponent
   ],
   imports: [
     BrowserModule,
