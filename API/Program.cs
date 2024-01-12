@@ -54,4 +54,10 @@ catch (Exception ex)
     logger.LogError(ex, "An error occured on Migration");
 }
 
+
+if (app.Environment.IsDevelopment()) app.UseDeveloperExceptionPage();
+else app.UseHsts();
+
+app.UseHttpsRedirection();
+
 app.Run();
