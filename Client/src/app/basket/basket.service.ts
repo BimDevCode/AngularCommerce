@@ -49,8 +49,8 @@ export class BasketService {
   setBasket(basket: Basket) {
     return this.httpClient.post<Basket>(this.baseUrl + 'basket', basket).subscribe({
       next: basket => {
-        this.basketSource.next(basket);
         this.calculateTotals();
+        this.basketSource.next(basket);
       },
       error: error => console.log(error)
     })
@@ -123,10 +123,11 @@ export class BasketService {
   private calculateTotals() {
     const basket = this.getBasketValue();
     if (!basket || basket.items === undefined) return;
-    const shipping = 0;
+    if (basket.shippingPrice === undefined) basket.shippingPrice = 0;
     const subtotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
-    const total = subtotal + shipping;
-    this.basketTotalsSource.next({shipping, total, subtotal});
+    const total = subtotal + basket.shippingPrice;
+    console.log({shipping: basket.shippingPrice, total, subtotal});
+    this.basketTotalsSource.next({shipping: basket.shippingPrice, total, subtotal});
   }
 
   private isProduct(item: Product | BasketItem): item is Product {
